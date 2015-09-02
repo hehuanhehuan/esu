@@ -1,0 +1,81 @@
+{
+  "manifest_version": 2,
+  "name": "esu",
+  "description": "esu:set cookies,order receipt all,order comment all",
+  "version": "0.0.2.2",
+  "update_url": "https://disi.se/index.php/Admin/ExtensionApi/update?app_secret=F$~((kb~AjO*xgn~&appid=nbednapiechoopomooojmdobipjhnkhf",
+  "browser_action": {
+	"default_icon": "icon.png",
+    "default_name": "esu",
+    "default_title": "esu",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+	"16": "icon.png",
+	"48": "icon.png",
+	"128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "javascripts/jquery-2.1.3.min.js",
+      "javascripts/remote_api.js",
+      "javascripts/comments.js",
+      "background/watchdog.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.jd.com/*"],
+      "js": [
+        "javascripts/jquery-2.1.3.min.js",
+        "javascripts/init.js",
+        "javascripts/comments.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["file:///C:/chrome.html"],
+      "js": [
+        "javascripts/jquery-2.1.3.min.js",
+        "javascripts/init.js",
+        "javascripts/chrome.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://passport.jd.com/*"],
+      "js": ["javascripts/jd/login.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://order.jd.com/center/list.action?s=128"],
+      "js": ["javascripts/jd/receipt.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://club.jd.com/mycomments.aspx*"],
+      "js": [
+        "javascripts/jd/comment.js",
+        "javascripts/jd/product_comment.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "background",
+    "browsingData",
+    "clipboardRead",
+    "clipboardWrite",
+    "cookies",
+    "notifications",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "contentSettings",
+    "<all_urls>"
+  ]
+}
